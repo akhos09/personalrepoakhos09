@@ -56,11 +56,6 @@ install_alacritty() {
     # Instalación con cargo
     cargo build --release
 
-    # Verificar y añadir la configuración de terminal
-    if ! infocmp alacritty &> /dev/null; then
-        sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
-    fi
-
     # Creación de icono en la GUI
     sudo cp target/release/alacritty /usr/local/bin 
     sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
