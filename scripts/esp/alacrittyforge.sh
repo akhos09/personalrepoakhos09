@@ -77,7 +77,7 @@ change_alacritty_theme() {
     echo -e "\nSelector de temas Alacritty:"
     # Usamos el directorio de configuración predeterminado de Linux para almacenar los temas
     mkdir -p ~/.config/alacritty/themes 2>/dev/null
-    git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
+    git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes 2>/dev/null
 
     echo -e "\nTemas disponibles y apariencia en el repositorio adjunto: https://github.com/alacritty/alacritty-theme"
 
