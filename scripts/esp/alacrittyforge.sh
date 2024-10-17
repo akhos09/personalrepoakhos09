@@ -67,6 +67,8 @@ change_alacritty_theme() {
 
     echo -e "\nTemas disponibles y apariencia en el repositorio adjunto: https://github.com/alacritty/alacritty-theme"
 
+#!/bin/bash
+
 # Solicitar al usuario que ingrese el nombre del tema
 read -p "Ingrese el nombre del tema de Alacritty (ej. dark, light, solarized, gruvbox): " theme
 
@@ -76,30 +78,24 @@ if [[ -f "$theme_file" ]]; then
     # Archivo de configuración de Alacritty
     config_file="$HOME/.config/alacritty/alacritty.yml"
 
+    # Crear la línea de importación en el formato correcto
+    new_import_line="import = [\"$theme_file\"]"
+
     # Verificar si la sección de importaciones ya existe
-    if ! grep -q "^import =" "$config_file"; then
-        # Si no existe, crearla con el tema
-        echo "import = [" > "$config_file.tmp"  # Crear un nuevo archivo temporal con la línea de importación
-        echo "    \"$theme_file\"" >> "$config_file.tmp"  # Agregar el tema
-        echo "  ]" >> "$config_file.tmp"  # Cerrar la sección de importación
-        # Agregar el resto del contenido del archivo original
-        cat "$config_file" >> "$config_file.tmp"
-        mv "$config_file.tmp" "$config_file"  # Reemplazar el archivo original
-        echo "Tema '$theme' aplicado exitosamente."
+    if grep -q "^import =" "$config_file"; then
+        # Reemplazar la línea existente de importación
+        sed -i "s|^import = .*|$new_import_line|" "$config_file"
+        echo "Tema '$theme' reemplazado exitosamente en la configuración."
     else
-        # La sección de importación ya existe, verificar si el tema ya está agregado
-        if ! grep -q "$theme_file" "$config_file"; then
-            # Si el tema no está, agregarlo
-            sed -i "/^import = \[/a \    \"$theme_file\"" "$config_file"
-            echo "Tema '$theme' agregado exitosamente."
-        else
-            echo "El tema '$theme' ya está aplicado en la configuración."
-        fi
+        # Si no existe, agregar la nueva línea de importación
+        echo -e "$new_import_line\n" >> "$config_file"
+        echo "Tema '$theme' agregado exitosamente a la configuración."
     fi
     
     # Iniciar Alacritty
     echo "Iniciando Alacritty con el tema '$theme'..."
     alacritty
+    alacritty migrate
 else
     echo "El tema '$theme' no existe. Por favor, asegúrate de que el archivo ${theme}.toml esté en la carpeta ~/.config/alacritty/themes/themes/"
     exit 1
