@@ -30,8 +30,8 @@ install_alacritty() {
     echo -e "\nInstalando Alacritty sin actualizar los paquetes..."
     
     # Instalación de dependencias
-    sudo apt install -y cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 \
-    libglib2.0-dev libgdk-pixbuf2.0-dev libxi-dev libxrender-dev libxrandr-dev libxinerama-dev
+    sudo apt install -y cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 cargo \
+    libglib2.0-dev libgdk-pixbuf2.0-dev libxi-dev libxrender-dev libxrandr-dev libxinerama-dev cargo
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     source $HOME/.cargo/env
     sudo apt install -y build-essential
@@ -39,10 +39,6 @@ install_alacritty() {
     # Clonamos el repo y nos quedamos en el dir del repo.
     git clone https://github.com/alacritty/alacritty.git 2>/dev/null
     cd alacritty || { echo "No se pudo cambiar al directorio de Alacritty."; exit 1; }
-
-    # Establecer la versión estable y actualizar
-    rustup override set stable
-    rustup update stable
 
     # Instalacion con cargo
     cargo build --release
