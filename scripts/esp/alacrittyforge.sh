@@ -83,7 +83,7 @@ read -p "Ingrese el nombre del tema de Alacritty (ej. dark, light, solarized, gr
 theme_file="$HOME/.config/alacritty/themes/themes/${theme}.toml"
 if [[ -f "$theme_file" ]]; then
     # Actualiza el archivo de configuración
-    config_file="$HOME/.config/alacritty/alacritty.yml"
+    config_file="$HOME/.config/alacritty/alacritty.toml"
 
     # Asegurarse de que el archivo alacritty.yml tenga la sección de imports
     if ! grep -q "import:" "$config_file"; then
