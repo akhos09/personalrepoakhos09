@@ -50,7 +50,7 @@ install_alacritty() {
     if ! infocmp alacritty &> /dev/null; then
         sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
     fi
-}
+} # Cierre de la función install_alacritty
 
 # Función para actualizar y luego instalar Alacritty
 update_and_install_alacritty() {
