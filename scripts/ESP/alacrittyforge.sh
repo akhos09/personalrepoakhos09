@@ -34,7 +34,7 @@ install_alacritty() {
     libglib2.0-dev libgdk-pixbuf2.0-dev libxi-dev libxrender-dev libxrandr-dev libxinerama-dev
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     source $HOME/.cargo/env
-    sudo apt install build-essential
+    sudo apt install -y build-essential
 
     # Clonamos el repo y nos quedamos en el dir del repo.
     git clone https://github.com/alacritty/alacritty.git 2>/dev/null
@@ -48,8 +48,9 @@ install_alacritty() {
     cargo build --release
 
     if ! infocmp alacritty &> /dev/null; then
-    sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
+        sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
     fi
+}
 
 # Función para actualizar y luego instalar Alacritty
 update_and_install_alacritty() {
@@ -73,7 +74,6 @@ icon_desktop_create() {
     sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
     sudo desktop-file-install extra/linux/Alacritty.desktop
     sudo update-desktop-database
-
 }
 
 # Menú de selección
