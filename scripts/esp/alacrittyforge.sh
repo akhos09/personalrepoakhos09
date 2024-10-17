@@ -49,6 +49,12 @@ install_alacritty() {
     if ! infocmp alacritty &> /dev/null; then
         sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
     fi
+
+    # Creación de icono en la GUI
+    sudo cp target/release/alacritty /usr/local/bin 
+    sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
+    sudo desktop-file-install extra/linux/Alacritty.desktop
+    sudo update-desktop-database
 }
 
 # Función para actualizar y luego instalar Alacritty
@@ -60,7 +66,7 @@ update_and_install_alacritty() {
 
 # Función para cambiar el tema de Alacritty
 change_alacritty_theme() {
-    echo "Cambiando el tema de Alacritty..."
+    echo -e "\nSelector temas Alacritty:"
    # We use Alacritty's default Linux config directory as our storage location here.
     mkdir -p ~/.config/alacritty/themes
     git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
