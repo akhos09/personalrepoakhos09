@@ -72,6 +72,13 @@ change_alacritty_theme() {
     git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
 
     echo -e "\nTemas disponibles y apariencia en el repositorio adjunto: https://github.com/alacritty/alacritty-theme"
+    # Define el tema
+    theme="mi_tema"
+    
+    # Crea la entrada de importación en el archivo de configuración
+    touch ~/.config/alacritty/alacritty.yml 2>/dev/null
+    echo "import: " > ~/.config/alacritty/alacritty.yml
+    echo "  - ~/.config/alacritty/themes/themes/${theme}.toml" >> ~/.config/alacritty/alacritty.yml
 }
 
 # Menú de selección
