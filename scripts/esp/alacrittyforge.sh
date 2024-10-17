@@ -66,7 +66,37 @@ change_alacritty_theme() {
     git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
 
     echo -e "\nTemas disponibles y apariencia en el repositorio adjunto: https://github.com/alacritty/alacritty-theme"
-  
+
+# Solicitar al usuario que ingrese el nombre del tema
+read -p "Ingrese el nombre del tema de Alacritty (ej. dark, light, solarized, gruvbox): " theme
+
+# Verificar que el directorio y archivo del tema existen
+theme_file="$HOME/.config/alacritty/themes/themes/${theme}.toml"
+if [[ -f "$theme_file" ]]; then
+    # Actualiza el archivo de configuración
+    config_file="$HOME/.config/alacritty/alacritty.toml"
+
+    # Asegurarse de que el archivo alacritty.yml tenga la sección de imports
+    if ! grep -q "import =" "$config_file"; then
+        echo "import = [" >> "$config_file"
+    fi
+
+    # Añadir el nuevo tema si no existe ya
+    if ! grep -q "$theme_file" "$config_file"; then
+        echo "    \"$theme_file\"" >> "$config_file"  # Agrega la línea del tema
+        echo "  ]" >> "$config_file"  # Cierra la sección de importación
+        echo "Tema '$theme' aplicado exitosamente."
+    else
+        echo "El tema '$theme' ya está aplicado en la configuración."
+    fi
+    
+    # Iniciar Alacritty
+    echo "Iniciando Alacritty con el tema '$theme'..."
+    alacritty
+else
+    echo "El tema '$theme' no existe. Por favor, asegúrate de que el archivo ${theme}.toml esté en la carpeta ~/.config/alacritty/themes/themes/"
+    exit 1
+fi  
 }
 
 # Menú de selección
