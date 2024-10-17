@@ -61,9 +61,9 @@ update_and_install_alacritty() {
 # Función para cambiar el tema de Alacritty
 change_alacritty_theme() {
     echo "Cambiando el tema de Alacritty..."
-    # Aquí puedes agregar los comandos para cambiar el tema
-    cp /ruta/a/nuevo_tema/alacritty.yml ~/.config/alacritty/alacritty.yml
-    echo "Tema de Alacritty cambiado exitosamente."
+   # We use Alacritty's default Linux config directory as our storage location here.
+    mkdir -p ~/.config/alacritty/themes
+    git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
 }
 
 # Menú de selección
