@@ -28,58 +28,34 @@ fi
 # Función para instalar Alacritty sin actualizar
 install_alacritty() {
     echo -e "\nInstalando Alacritty sin actualizar los paquetes..."
+    
+    # Instalación de dependencias
+    sudo apt install -y cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 \
+    libglib2.0-dev libgdk-pixbuf2.0-dev libxi-dev libxrender-dev libxrandr-dev libxinerama-dev
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    source $HOME/.cargo/env
+    sudo apt install build-essential
+
     # Clonamos el repo y nos quedamos en el dir del repo.
     git clone https://github.com/alacritty/alacritty.git 2>/dev/null
     cd alacritty || { echo "No se pudo cambiar al directorio de Alacritty."; exit 1; }
-
-    # Instalación de rustup (compiler rust y sus dependencias, establecemos cargo en el PATH)
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh 2>/dev/null
-    source "$HOME/.cargo/env" || { echo "Error al configurar el entorno de Rust."; exit 1; }
 
     # Establecer la versión estable y actualizar
     rustup override set stable
     rustup update stable
 
-    # Comprobar si cargo está disponible
-    if ! command -v cargo &> /dev/null; then
-        echo "Cargo no se pudo encontrar. Asegúrate de que Rust se haya instalado correctamente."
-        exit 1
-    fi
-
-    # Instalación de dependencias
-    sudo apt install -y cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 2>/dev/null
-
     # Instalacion con cargo
     cargo build --release
 
-    # Comprobar si el binario se generó
-    if [[ ! -f target/release/alacritty ]]; then
-        echo "Error: El binario 'alacritty' no se generó en target/release."
-        exit 1
+    if ! infocmp alacritty &> /dev/null; then
+    sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
     fi
-
-    # Comprobar si alacritty terminfo está instalado
-    if infocmp alacritty &> /dev/null; then
-        echo "La entrada de terminal 'alacritty' ya está instalada."
-    else
-        echo "La entrada de terminal 'alacritty' no está instalada. Instalando..."
-        sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
-
-        if [ $? -eq 0 ]; then
-            echo "La entrada de terminal 'alacritty' se ha instalado correctamente."
-        else
-            echo "Error: No se pudo instalar la entrada de terminal 'alacritty'."
-        fi
-    fi
-
-    # Configuración final
-    echo "source $(pwd)/extra/completions/alacritty.bash" >> ~/.bashrc
-}
 
 # Función para actualizar y luego instalar Alacritty
 update_and_install_alacritty() {
     echo "Actualizando los paquetes e instalando Alacritty..."
     sudo apt update && sudo apt upgrade -y
+    install_alacritty
 }
 
 # Función para cambiar el tema de Alacritty
@@ -97,6 +73,7 @@ icon_desktop_create() {
     sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
     sudo desktop-file-install extra/linux/Alacritty.desktop
     sudo update-desktop-database
+
 }
 
 # Menú de selección
