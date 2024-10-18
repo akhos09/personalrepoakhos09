@@ -1,6 +1,6 @@
 # VS2ASIR-ESP-ENG
 
-Welcome to my Class Activities repository. This repository is a collection of scripts and projects that I have developed as part of my learning experience. Here, you'll find various scripts, coding exercises, and other materials that showcase my progress and understanding of programming concepts.
+Welcome to my Class Activities repository. This repository is a collection of scripts and projects that I have developed as part of my learning experience. Here, you'll find various scripts, coding exercises, and other materials that showcase my progress and understanding of programming and administration of systems concepts.
 
 ## Table of Contents
 
@@ -22,4 +22,4 @@ This repository contains a variety of scripts and projects that I have created t
 To clone this repository, use the following command:
 
 ```bash
-git clone https://github.com/akhos09/VS2ASIR-ESP-ENG.git
+git clone https://github.com/akhos09/vs2asir-esp-eng.git
