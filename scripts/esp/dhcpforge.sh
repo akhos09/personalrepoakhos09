@@ -48,8 +48,21 @@ configure_dhcp_server(){
      range $range_start $range_end;
    }"
 
-   sudo sed -i '/^subnet [0-9.]\+ netmask [0-9.]\+ {/,/^}/d' "$config_file"
+   echo "option domain-name \"example.org\";" | sudo tee "$config_file" > /dev/null
+   echo "option domain-name-servers ns1.example.org, ns2.example.org;" | sudo tee -a "$config_file" > /dev/null
+   echo "default-lease-time 600;" | sudo tee -a "$config_file" > /dev/null
+   echo "max-lease-time 7200;" | sudo tee -a "$config_file" > /dev/null
+   echo "ddns-update-style none;" | sudo tee -a "$config_file" > /dev/null
    echo -e "\n$config_dhcp" | sudo tee -a "$config_file" > /dev/null
+
+      echo "DHCP configuration updated in $config_file."
+
+      sudo systemctl restart isc-dhcp-server
+      sudo dhcp-lease-list --lease /var/lib/dhcp/dhcpd.leases | awk '{print $3}' | while read ip; do
+      ping -c 1 $ip &> /dev/null && ssh -o ConnectTimeout=2 $ip "sudo dhclient -r && sudo dhclient" &
+   
+   done
+}
 }
 
 while true; do
