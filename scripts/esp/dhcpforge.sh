@@ -34,6 +34,16 @@ configure_dhcp_server(){
        exit 1
    fi
 
+    ip -o link show | awk -F': ' '{print $2}' | grep -v "lo"
+   read -p "Enter the name of the interface for the DHCP server (e.g., ens33, ens34, etc.): " ens
+
+   config_file="/etc/default/isc-dhcp-server"
+   if [ -f "$config_file" ]; then
+       sudo sed -i "s/^INTERFACESv4=.*/INTERFACESv4=\"$ens\"/" "$config_file"
+   else
+       echo "Error: $config_file doesn't exist."
+   fi
+
    read -p "Enter the network address (e.g., 10.33.200.0): " subnet
    read -p "Enter the network mask (e.g., 255.255.255.0): " netmask
    read -p "Enter the IP address of the router (e.g., 10.33.200.1): " router
