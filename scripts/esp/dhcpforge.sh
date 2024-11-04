@@ -7,11 +7,14 @@
 #:Usage: First option makes the complete installation for the DHCP-SERVER. The second option configures and sets up all of the parameters needed.
 #:Dependencies:
 #:      - "ISC-DHCP-SERVER"
+
 install_dhcp_server(){
    sudo apt-get update && sudo apt-get upgrade -y
    sudo apt-get install isc-dhcp-server
+   echo -e "Copying the file isc-dhcp-server in /etc/default/isc-dhcp-server.copy..."
    sudo cp /etc/default/isc-dhcp-server /etc/default/isc-dhcp-server.copy
-
+   
+   echo -e "Interfaces of the system: "
    ip -o link show | awk -F': ' '{print $2}' | grep -v "lo"
    read -p "Enter the name of the interface for the DHCP server (e.g., ens33, ens34, etc.): " ens
 
@@ -33,8 +36,8 @@ configure_dhcp_server(){
        echo "Error: The $config_file doesn't exist."
        exit 1
    fi
-
-    ip -o link show | awk -F': ' '{print $2}' | grep -v "lo"
+   echo -e "Interfaces of the system: "
+   ip -o link show | awk -F': ' '{print $2}' | grep -v "lo"
    read -p "Enter the name of the interface for the DHCP server (e.g., ens33, ens34, etc.): " ens
 
    config_file="/etc/default/isc-dhcp-server"
@@ -47,7 +50,7 @@ configure_dhcp_server(){
    read -p "Enter the network address (e.g., 10.33.200.0): " subnet
    read -p "Enter the network mask (e.g., 255.255.255.0): " netmask
    read -p "Enter the IP address of the router (e.g., 10.33.200.1): " router
-   read -p "Enter the DNS (e.g., 8.8.8.8, 1.1.1.1): " dns
+   read -p "Enter the DNS ( separated by commas , e.g., 8.8.8.8,1.1.1.1): " dns
    read -p "Enter the start of the IP range (e.g., 10.33.200.5): " range_start
    read -p "Enter the end of the IP range (e.g., 10.33.200.20): " range_end
 
