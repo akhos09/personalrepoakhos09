@@ -1,6 +1,6 @@
 # VS2ASIR-ESP-ENG
 
-Welcome to my Class Activities repository. This repository is a collection of scripts and projects that I have developed as part of my learning experience. Here, you'll find various scripts, coding exercises, and other materials that showcase my progress and understanding of programming and administration of systems concepts.
+This repository is a collection of scripts and projects that I have developed as part of my learning experience. Here, you'll find various scripts, coding exercises, and other materials that showcase my progress and understanding of programming and administration of systems concepts.
 
 ## Table of Contents
 
