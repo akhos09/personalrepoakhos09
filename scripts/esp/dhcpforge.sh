@@ -76,7 +76,6 @@ configure_dhcp_server(){
    
    done
 }
-}
 
 while true; do
    echo "Select an option:"
