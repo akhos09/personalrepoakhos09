@@ -1,5 +1,4 @@
-# VS2ASIR-ESP-ENG
-
+# Personal repo
 This repository is a collection of scripts and projects that I have developed as part of my learning experience. Here, you'll find various scripts, coding exercises, and other materials that showcase my progress and understanding of programming and administration of systems concepts.
 
 ## Table of Contents
