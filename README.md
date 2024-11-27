@@ -1,5 +1,5 @@
 # Personal repo
-This repository is a collection of scripts and projects that I have developed as part of my learning experience. Here, you'll find various scripts, coding exercises, and other materials that showcase my progress and understanding of programming and administration of systems concepts.
+Repo made for saving anything I need to be saved (class projects, personal tests, etc.)
 
 ## Table of Contents
 
@@ -9,11 +9,11 @@ This repository is a collection of scripts and projects that I have developed as
 
 ## Overview
 
-This repository contains a variety of scripts and projects that I have created throughout my classes. Each folder represents different topics or assignments, providing a structured way to explore my work.
+This repository contains a variety of scripts and projects that I have created throughout my classes. Each folder represents different topics or assignments, providing a structured way to explore my work. I also use this to save anything I need to be saved.
 
 ## Technologies Used
 
-- **Languages:** Bash
+- **Languages:** Bash, Python
 - **Tools:** Git, GitHub, Nano, Visual Studio Code
   
 ## Getting Started
@@ -21,4 +21,4 @@ This repository contains a variety of scripts and projects that I have created t
 To clone this repository, use the following command:
 
 ```bash
-git clone https://github.com/akhos09/vs2asir-esp-eng.git
+git clone https://github.com/akhos09/personalrepoakhos09git
