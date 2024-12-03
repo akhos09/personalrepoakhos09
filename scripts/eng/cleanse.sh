@@ -14,9 +14,9 @@ mkdir $bin 2>/dev/null                    # Creates the folder, suppressing erro
 ###DIRECTORY CHECKS AND HELP COMMAND###
 
 if [[ -z "$1" || "$1" == "--help" || "$1" == "-h" ]]; then
-    echo -e "cleanse (v1.0)\n\nUsage: limpiapablo.sh [OPTIONS] file\nOptions:\t-R (Restore the specified file)\n\t\t-L (List files in the recycle bin.)"
+    echo -e "cleanse (v1.0)\n\nUsage: cleanse.sh [OPTIONS] file\nOptions:\t-R (Restore the specified file)\n\t\t-L (List files in the recycle bin.)"
 elif [[ -d "$3" || -d "$2" || -d "$1" ]]; then
-    echo -e "cleanse (v1.0): A directory cannot be used.\nTry using a file or type limpiapablo.sh --help or -h for more information."
+    echo -e "cleanse (v1.0): A directory cannot be used.\nTry using a file or type cleanse.sh --help or -h for more information."
 
 ###FILE COMPRESSION AND MOVE TO RECYCLE BIN###
 
@@ -56,5 +56,5 @@ elif [[ "$2" == "-R" ]]; then
 ###HELP COMMAND OUTPUT###
 
 else
-    echo -e "cleanse (v1.0): Invalid command.\nTry using another file or type limpiapablo.sh --help or -h for more information."
+    echo -e "cleanse (v1.0): Invalid command.\nTry using another file or type cleanse.sh --help or -h for more information."
 fi
